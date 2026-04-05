@@ -1,0 +1,45 @@
+@startuml
+skinparam state {
+  BackgroundColor<<Defeated>> #pink
+}
+
+title Жизненный цикл Волка (MITM-атака)
+
+[*] --> Hidden : <<create>>
+
+state "В засаде" as Hidden
+state "Маскируется под Бабушку" as Impersonating
+state "Побежден" as Defeated <<Defeated>>
+state c <<choice>>
+
+' Все события идут в точку выбора
+Hidden --> c : встретитьБабушку()
+
+' Логика
+c --> Impersonating : [съел Бабушку]
+c --> Hidden : [не удалось]
+
+' После маскировки возможны события
+Impersonating --> c : проверкаЛичности()
+
+c --> Impersonating : [обман успешен]
+c --> Defeated : [разоблачен]
+
+' Финал
+Defeated --> [*] : <<destroy>>
+
+note left of c
+  **Точка выбора (Choice)**
+  Определяет:
+  удалось ли Волку
+  выполнить подмену
+  или его разоблачили
+end note
+
+note right of Impersonating
+  Волк выполняет MITM:
+  подменяет Бабушку
+  и взаимодействует с Шапочкой
+end note
+
+@enduml
