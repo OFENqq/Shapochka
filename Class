@@ -1,0 +1,54 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+' --- Иерархия существ ---
+abstract class Person {
+    + name: String
+}
+
+class Hood extends Person {
+    + deliver(b: Basket)
+    + verify()
+}
+
+class Grandma extends Person {
+    + receive(b: Basket)
+}
+
+class Wolf extends Person {
+    + attack()
+    + impersonate()
+}
+
+class Hunter extends Person {
+    + rescue()
+}
+
+' --- Объекты доставки ---
+class Basket {
+    + contents: String
+}
+
+class Location {
+    + name: String
+}
+
+' --- СВЯЗИ ---
+Hood --> Basket : несет >
+Grandma --> Basket : получает >
+Wolf --> Grandma : подменяет >
+Hunter --> Wolf : побеждает >
+
+Person --> Location : находится >
+
+note right of Wolf
+  Волк подменяет Бабушку
+  (MITM-атака)
+end note
+
+note bottom of Hood
+  Проверка личности:
+  «Почему такие большие зубы?»
+end note
+
+@enduml
