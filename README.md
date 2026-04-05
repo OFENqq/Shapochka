@@ -9,4 +9,4 @@
 | Class     | Структура классов системы                     | [doc/class.md](doc/class.md)   |
 | Activity  | Алгоритм работы системы                       | [doc/activity.md](doc/activity.md) |
 | Sequence  | Взаимодействие персонажей                     | [doc/sequence.md](doc/sequence.md) |
-| State     | Состояния королевства                         | [doc/state.md](doc/state.md)  |
+| State     | Состояние                                     | [doc/state.md](doc/state.md)  |
