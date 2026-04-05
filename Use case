@@ -1,1 +1,37 @@
+@startuml
+left to right direction
 
+actor "Курьер (Шапочка)" as Hood
+actor "Получатель (Бабушка)" as Grandma
+actor "Волк (злоумышленник)" as Wolf
+actor "Охотник" as Hunter
+
+package "Система доставки" {
+  usecase "Доставить пирожки" as Deliver
+  usecase "Получить пирожки" as Receive
+  usecase "Проверить личность" as Verify
+  usecase "Задать вопрос:\n«Почему такие большие зубы?»" as Question
+  usecase "Ответить" as Answer
+  usecase "Подменить Бабушку (MITM)" as MITM
+  usecase "Спасти из брюха" as Rescue
+}
+
+' Основной процесс
+Hood --> Deliver
+Grandma --> Receive
+Deliver --> Receive
+
+' MITM атака волка
+Wolf --> MITM
+MITM --> Receive
+
+' Проверка личности
+Hood --> Verify
+Verify --> Question
+Wolf --> Answer
+Question --> Answer
+
+' Спасение
+Hunter --> Rescue
+
+@enduml
